@@ -1,0 +1,46 @@
+.LoginMain, .registerMain {
+  position: relative;
+  height: 100vh;
+  width: 100vw; /* Full width */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../assets/logo.png'); /* Optional fallback */
+  background-size: cover; /* Make image cover full screen */
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Blur layer (optional) */
+.LoginMain::before, .registerMain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: inherit; /* same background as parent */
+  background-size: cover;
+  background-position: center;
+  filter: blur(6px);
+  transform: scale(1.1);
+  z-index: 0;
+}
+
+/* Form container */
+.LoginForm, .registerForm {
+  position: relative;
+  z-index: 1; /* Above the blur */
+  width: 350px;
+  background: rgba(255, 255, 255, 0.85); /* slightly transparent */
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 400px) {
+  .LoginForm, .registerForm {
+    width: 90%;
+    padding: 20px;
+  }
+}
