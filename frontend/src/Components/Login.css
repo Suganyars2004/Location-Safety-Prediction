@@ -1,1 +1,59 @@
-@import "./Register.css";
+.login-bg {
+  position: relative;
+  height: 100vh;
+  background: url("../assets/logo1.png") center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.error-text {
+  color: red;
+  font-size: 14px;
+  margin-top: 8px;
+  text-align: center;
+}
+.login-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+ 
+  transform: scale(1.1);
+  z-index: 1;
+}
+
+.login-card {
+  position: relative;
+  z-index: 2;
+  width: 380px;
+  background: rgba(106, 155, 124, 0.33);
+  padding: 30px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(3px);
+}
+
+.login-card h2 {
+  margin-bottom: 20px;
+}
+
+.login-card input {
+  width: 100%;
+  padding: 7px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.login-card button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  background: linear-gradient(to right, #0f1512, #1c3d26);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}

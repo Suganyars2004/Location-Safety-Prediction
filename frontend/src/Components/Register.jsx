@@ -1,71 +1,108 @@
-import { useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Register.css";
-import { Link } from "react-router-dom";
 
-export default function Register() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+const Register = () => {
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
-      alert("Passwords do not match");
+    // Password match check
+    if (data.password !== data.confirmPassword) {
+      setError("Passwords do not match!");
       return;
     }
 
-    try {
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/register",
-        { name, email, password }
-      );
+    // Store user in localStorage
+    localStorage.setItem(
+      "registeredUser",
+      JSON.stringify({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      })
+    );
 
-      alert(res.data.message);
-    } catch (err) {
-      alert(err.response?.data || "Registration failed");
-    }
+    // Auto login after register
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        name: data.name,
+        email: data.email,
+      })
+    );
+
+    setError("");
+    navigate("/");
   };
 
   return (
-    <div className="auth-bg">
-      <form className="auth-card" onSubmit={handleSubmit}>
-        <h2>Create An Account</h2>
+    <div className="register-bg">
+      <div className="register-card">
+        <h2>Create an Account</h2>
 
-        <input
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            value={data.name}
+            onChange={handleChange}
+            required
+          />
 
-        <input
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={data.email}
+            onChange={handleChange}
+            required
+          />
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={data.password}
+            onChange={handleChange}
+            required
+          />
 
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            value={data.confirmPassword}
+            onChange={handleChange}
+            required
+          />
 
-        <button type="submit">Sign up</button>
+          {error && <p className="error-text">{error}</p>}
+
+          <button type="submit">Sign Up</button>
+        </form>
 
         <p>
           Already have an account? <Link to="/login">Login</Link>
         </p>
-      </form>
+      </div>
     </div>
   );
-}
+};
+
+export default Register;

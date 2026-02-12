@@ -1,53 +1,63 @@
-.auth-bg {
+.register-bg {
+  position: relative;
   height: 100vh;
   background: url("../assets/logo1.png") center/cover no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
-
-.auth-card {
-  width: 380px;
-  padding: 40px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(14px);
-  border-radius: 20px;
+.error-text {
+  color: #ff4d4f;
+  background-color: #fff1f0;
+  border: 1px solid #ffa39e;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-top: 10px;
   text-align: center;
 }
 
-.auth-card h2 {
-  color: #000;
+.register-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  
+  transform: scale(1.1);
+  z-index: 1;
+}
+.register-card {
+  position: relative;
+  z-index: 2;
+  width: 400px;
+  background: rgba(106, 155, 124, 0.33);
+  padding: 30px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(3px);
+}
+
+.register-card h2 {
   margin-bottom: 20px;
 }
 
-.auth-card input {
+.register-card input {
   width: 100%;
-  padding: 12px;
+  padding: 7px;
   margin-bottom: 15px;
-  border-radius: 8px;
-  border: none;
+  border-radius:10px;
+  border: 1px solid #ddd;
 }
 
-.auth-card button {
+.register-card button {
   width: 100%;
   padding: 12px;
-  background: #053b28;
-  color: white;
+  border-radius: 25px;
   border: none;
-  border-radius: 10px;
-  font-weight: bold;
+  background: linear-gradient(to right, #0f1512, #1c3d26);
+  color: white;
+  font-size: 16px;
   cursor: pointer;
-}
-
-.auth-card p {
-  margin-top: 15px;
-}
-@media (max-width: 480px) {
-  .auth-card {
-    padding: 25px;
-  }
-
-  .auth-card h2 {
-    font-size: 22px;
-  }
 }
